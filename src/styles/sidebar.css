@@ -1,0 +1,21 @@
+.sidebar{
+    text-align: center;
+    padding-top: 38px;
+    height: 100%;
+    background: rgba(11, 98, 234, 1);
+    width: 100%;
+}
+
+.sidebar img {
+    max-width: 60%; /* Asegura que la imagen no se desborde del contenedor */
+    height: auto; /* Altura automática para mantener la relación de aspecto */
+    padding-bottom: 38px;
+  }
+
+  .navCentrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }

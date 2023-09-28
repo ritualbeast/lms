@@ -1,0 +1,22 @@
+.sidebar-container{
+    position: fixed;
+    height: 100%;
+    left: 0;
+    background: rgba(11, 98, 234, 1);
+    
+    margin: 0%;
+    padding: 0%;
+}
+
+.rowRegistros{
+    height: 100%;
+    margin: 0%;
+    padding: 0%;
+}
+
+.sideBarPrincipal{
+    height: 100%;
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+}
