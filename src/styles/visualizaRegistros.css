@@ -2,3 +2,76 @@
     background-color: #1a1a1a;
     color: rgb(124, 28, 28);
 }
+.filtrosRegistros{
+    display: flex;
+    width: 100%;
+}
+
+.selectEstado{
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    
+    border-color: linear-gradient(0deg, #DBE0E4, #DBE0E4),
+linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    color: rgba(139, 151, 163, 1);
+   
+    height: 40px;
+    top: 28px;
+    left: 272px;
+    border-radius: 6px;
+    border: 1.05px;
+    border: 1.05px solid rgba(219, 224, 228, 1)
+
+
+}
+.datePicker{
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    
+    border-color: linear-gradient(0deg, #DBE0E4, #DBE0E4),
+linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    color: rgba(139, 151, 163, 1);
+    height: 40px;
+    top: 28px;
+    left: 272px;
+    border-radius: 6px;
+    border: 1.05px;
+    border: 1.05px solid rgba(219, 224, 228, 1)
+
+}
+
+.tituloRegistros{
+    
+    font-family: Public Sans;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: rgba(75, 70, 92, 1);
+
+}
+
+.periodo{
+    font-family: Open Sans;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: rgba(75, 70, 92, 1);
+
+
+}
+
+.estado{
+    font-family: Open Sans;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: rgba(75, 70, 92, 1);
+}

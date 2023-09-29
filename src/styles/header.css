@@ -1,0 +1,14 @@
+.tituloHeader{
+    font-family: Public Sans;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: rgba(75, 70, 92, 1);
+
+}
+.header{
+    padding-top: 43px;
+    padding-bottom: 43px;
+}

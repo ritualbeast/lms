@@ -2,7 +2,7 @@
     position: fixed;
     height: 100%;
     left: 0;
-    background: rgba(11, 98, 234, 1);
+    background: rgb(131, 168, 228);
     
     margin: 0%;
     padding: 0%;
@@ -19,4 +19,8 @@
     width: 100%;
     margin: 0%;
     padding: 0%;
+}
+.contenidoPrincipal{
+    background: #F9F9F9 !important;
+
 }

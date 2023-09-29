@@ -15,7 +15,7 @@ const Registros = () => {
           <Sidebar />
         </Col>
         {/* Contenido ocupa el 80% */}
-        <Col xs={9}>
+        <Col xs={9} className='contenidoPrincipal'>
           <Container>
             <Row>
               <Col>

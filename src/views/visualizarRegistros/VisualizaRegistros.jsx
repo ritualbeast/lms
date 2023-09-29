@@ -4,6 +4,10 @@ import '../../styles/visualizaRegistros.css';
 import { Box , Checkbox} from '@mui/material';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Button , Container, Row, Col
+} from 'react-bootstrap';
+import limpiar from '../../assets/img/limpiar.jpg';
+import ModalVisualizarRegistros from './ModalVisualizarRegistros';
 
 const columns = [
   { field: 'id', headerName: 'N° Identificación', flex: 1,  headerClassName: 'super-app-theme--header' },
@@ -45,14 +49,23 @@ export default function VisualizaRegistros() {
 
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
+    const [showModalVisualizarRegistros, setShowModalVisualizarRegistros] = useState(false);
+
+    const openModalVisualizarRegistros = () => {
+        setShowModalVisualizarRegistros(true);
+    }
+
+
 
     return (
         <>
-            <div className="container" style={{backgroundColor : 'blue', marginTop: '1rem', padding: '1rem', borderRadius: '10px'}}>
-                <p>Registros</p>
-                <div className='filtrosRegistros'>
-                    <div>
-                        <p>Fecha de registro</p>
+            <div className="container" style={{backgroundColor : 'white', padding: '3rem', borderRadius: '10px'}}>
+                <p className="tituloRegistros"
+                >Registros</p>
+                <Row className='filtrosRegistros'>
+                    <Col md={4}>
+                        <p className='periodo'
+                        >Periodo</p>
                         <DatePicker
                             selected={startDate}
                             startDate={startDate}
@@ -62,22 +75,32 @@ export default function VisualizaRegistros() {
                             }}
                             selectsRange
                             withPortal
+                            placeholderText='Seleccionar rango de fechas'
+                            className='datePicker'
                             
                         />
-                    </div>
-                    <div>
-                        <p>Estado</p>
-                        <select>
-                            <option value="">Seleccione</option>
+                    </Col>
+                    <Col md={4}>
+                        <p className='estado'
+                        >Estado</p>
+                        <select className='selectEstado' >
+                            <option value="">Seleccionar</option>
                             <option value="1">No Contesta</option>
                             <option value="2">Lista Gris</option>
                             <option value="3">Contactado</option>
                             <option value="4">Venta Concretada</option>
                             <option value="5">Por Contactar</option>
                         </select>
-                    </div>
+                    </Col>
+                    <Col md={4}> 
+                        <Button variant="success">Buscar</Button>{' '}
+                        
+                        <Button variant="success" onClick={openModalVisualizarRegistros}
+                         >Limpiar
+                        </Button>{' '}
+                    </Col>
 
-                </div>
+                </Row>
                 
                 <div style={{ height: 400, width: '100%', backgroundColor: 'white' }}>
                 <Box
@@ -117,7 +140,12 @@ export default function VisualizaRegistros() {
                 </div>
 
             </div>
-            
+            {showModalVisualizarRegistros &&
+            <ModalVisualizarRegistros
+                open={showModalVisualizarRegistros}
+                onClose={() => setShowModalVisualizarRegistros(false)}
+            /> 
+            }
         </>
         
     );
