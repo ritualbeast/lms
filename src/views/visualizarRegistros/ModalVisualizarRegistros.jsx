@@ -1,78 +1,139 @@
 import React, {useState} from 'react'
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import '../../styles/ModalVisualizarRegistros.css';
+import svgManager from '../../assets/img/svg';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const xSVG = svgManager.getSVG('x');
 
 const ModalVisualizarRegistros = ({open, onClose}) => {
+  const [selectedValue, setSelectedValue] = useState(""); 
 
-    const [show, setShow] = useState(false);
+  const handleOutsideClick = (e) => {
+    e.stopPropagation(); 
+  };
 
-    const handleClose = () => setShow(false);
+  const handleSelectChange = (e) => {
+    setSelectedValue(e.target.value);
+  };
 
-    const handleShow = () => setShow(true);
+  const handleSaveClick = () => {
+    if (selectedValue !== "") {
+      onClose();
+    }
+    else {
+      toast.error('Debe seleccionar un estado para poder salir de la pantalla', {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+      });
+    }
 
+  };
+
+    const data = [
+        {
+          label: 'N° identificación',
+          content: 'Valor 1',
+        },
+        {
+          label: 'Nombres',
+          content: 'Valor 2',
+        },
+        {
+          label: 'Apellidos',
+          content: 'Valor 3',
+        },
+        {
+          label: 'Teléfono',
+          content: 'Valor 4',
+        },
+        {
+          label: 'Correo electrónico',
+          content: 'Valor 5',
+        },
+        {
+          label: 'Periodo',
+          content: 'Valor 6',
+        },
+      ];
 
 
     return (
-        <Modal
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={open}
-          onHide={onClose}
-        >
-          <div className="tituloModal">
-            <div>Información del Cliente</div>
-          </div>
-          <div className="containerModal">
-            <Row className="justify-content-center">
-              <Col sm={6}> {/* Cambia el valor de sm según tu necesidad para ocupar el 50% */}
-                <RowModalContent />
-              </Col>
-            </Row>
-          </div>
-          <Modal.Footer>
-            <Button onClick={onClose}>Close</Button>
-          </Modal.Footer>
-        </Modal>
+        <>
+          <ToastContainer
+            toastStyle={{ backgroundColor: "  rgba(234, 84, 85, 0.16)", color: "#EA5455" }}
+
+           />
+          <Modal
+            size="md"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={open}
+            onHide={onClose}
+            backdrop="static"
+            backdropClassName="custom-opacity" // Añade esta línea
+          >
+            <span dangerouslySetInnerHTML={{ __html: xSVG }} onClick={onClose} className='closeModal' />
+            <div className="modalVisualizarRegistros" onClick={handleOutsideClick}>
+              <div className="tituloModal">   
+                <p>Información del Cliente</p>
+              </div>
+              <div className="containerModal">
+                <Row className="justify-content-center">
+                <Col sm={6} className="colModals">
+                  <RowModalContent data={data} handleSelectChange={handleSelectChange} selectedValue={selectedValue} />
+                </Col>
+
+                </Row>
+              </div>
+              <br />
+                <div className="botonModal">
+                    <button className='buttonModal' onClick={handleSaveClick}>
+                        Guardar
+                    </button>
+                </div>
+                <br />
+            </div>    
+            
+
+          </Modal>
+        </>
       );
     };
+
+
     
-    const RowModalContent = () => {
+    const RowModalContent = ({ data, handleSelectChange, selectedValue }) => {
       return (
-        <table>
+        <table style={{ margin: '0 auto', textAlign: 'center' }}>
           <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td className="label">{item.label}</td>
+                <td className="content">{item.content}</td>
+              </tr>
+            ))}
             <tr>
-              <td>Contenido 1</td>
-              <td>Contenido 2</td>
-            </tr>
-            <tr>
-              <td>Contenido 3</td>
-              <td>Contenido 4</td>
-            </tr>
-            <tr>
-              <td>Contenido 5</td>
-              <td>Contenido 6</td>
-            </tr>
-            <tr>
-              <td>Contenido 7</td>
-              <td>Contenido 8</td>
-            </tr>
-            <tr>
-              <td>Contenido 9</td>
-              <td>Contenido 10</td>
-            </tr>
-            <tr>
-              <td>Contenido 11</td>
-              <td>Contenido 12</td>
-            </tr>
-            <tr>
-              <td>Contenido 13</td>
-              <td>Contenido 14</td>
+              <td className="label">Estado <span className="required-asterisk">*</span></td>
+              <td>
+                <select className="selectEstado" value={selectedValue} onChange={handleSelectChange}>
+                  <option value="">Seleccionar</option>
+                  <option value="1">No Contesta</option>
+                  <option value="2">Lista Gris</option>
+                  <option value="3">Contactado</option>
+                  <option value="4">Venta Concretada</option>
+                  <option value="5">Por Contactar</option>
+                </select>
+              </td>
             </tr>
           </tbody>
         </table>
       );
+    };
     
-}
 
 export default ModalVisualizarRegistros

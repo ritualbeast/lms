@@ -19,3 +19,46 @@
     width: 100%;
     background-color: #f1f1f1;
 }
+
+.pLogin{
+    font-family: Open Sans;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: rgba(23, 29, 73, 1);
+}
+
+.pLogin2{
+    font-family: Open Sans;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 41px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: rgba(139, 151, 163, 1);
+
+}
+
+.pLogin3{
+    font-family: Open Sans;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 33px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: rgba(11, 98, 234, 1);
+
+}
+.logoVerisLogin{
+    width: 163px;
+    height: 85px;
+    top: 225px;
+    left: 165px
+
+}
+
+.loginBackground{
+    width: 100% !important;
+}
