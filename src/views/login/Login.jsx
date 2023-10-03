@@ -49,19 +49,23 @@ export default function Login() {
         
         <Grid 
         
-        item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        item xs={12} sm={8} md={5} component={Paper} elevation={6} square
+        
+        style={{alignItems: 'center', display: 'flex', justifyContent: 'center'}}
+        >
           <Box
             sx={{
               my: 8,
-              mx: 4,
               display: 'flex',
               flexDirection: 'column',
               width: '60%',
+              
               
             }}
           >
             <div>
                 <img src={LogoVeris} alt="Logo Veris" className='logoVerisLogin' />
+                
                 <p className='pLogin2'
                 >
                   ¡Bienvenido!
@@ -83,6 +87,7 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                style={{margin : '0', marginBottom: '1rem'}}
               />
                 <p className='pLogin'
                 >Contraseña</p>
@@ -94,16 +99,18 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                style={{margin : '0', marginBottom: '1rem'}}
               />
               
-              <Button
+              <button
+                className='buttonLogin'
                 type="submit"
                 fullWidth
-                variant="contained"
+                style={{backgroundColor: 'rgba(11, 98, 234, 1)', color: 'white'} }
                 sx={{ mt: 3, mb: 2 }}
               >
                 Continuar
-              </Button>
+              </button>
               
             </Box>
           </Box>

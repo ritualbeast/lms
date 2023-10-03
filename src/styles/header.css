@@ -12,3 +12,14 @@
     padding-top: 43px;
     padding-bottom: 43px;
 }
+
+.headerIcons{
+
+    display: flex;
+    align-items: center;
+}
+.sameHeight {
+    vertical-align: middle;
+
+  }
+  

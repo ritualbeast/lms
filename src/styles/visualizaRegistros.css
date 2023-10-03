@@ -95,3 +95,64 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
   .custom-header-text {
     color: blue; /* Cambia el color del texto del encabezado de las columnas a azul */
   }
+
+  .btnBuscar{
+    background-color: rgba(67, 179, 117, 1);
+    width: 40%; /* Cambiado de píxeles a porcentaje */
+    height: 40px;
+    border-radius: 6px;
+    font-family: Public Sans;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0.4300000071525574px;
+    text-align: left;
+    color: rgba(255, 255, 255, 1);
+    border-style: none;
+    text-align: center;
+  }
+
+
+  .colBuscar {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+  }
+  
+  .btnBuscar {
+    background-color: rgba(67, 179, 117, 1);
+    width: 40%; /* Puedes ajustar este valor según tu diseño */
+    height: 40px;
+    border-radius: 6px;
+    font-family: Public Sans;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0.4300000071525574px;
+    text-align: center; /* Cambiado a centrado */
+    color: rgba(255, 255, 255, 1);
+    border: none; /* Eliminado el border-style */
+    margin-right: 10px; /* Espacio entre botones (puedes ajustar este valor) */
+  }
+  
+  .btnLimpiar {
+    background-color: rgba(255, 255, 255, 1);
+    width: 20%; /* Puedes ajustar este valor según tu diseño */
+    height: 40px;
+    border-radius: 6px;
+    border: 1.2px solid rgba(67, 179, 117, 1);
+  }
+  
+  .css-t89xny-MuiDataGrid-columnHeaderTitle{
+    color : rgb(255, 255, 255);
+    font-family: Open Sans;
+    font-size: 12px;
+    font-weight: 700;
+
+  }
+
+  .css-5wly58-MuiDataGrid-root .MuiDataGrid-columnHeaderDraggableContainer {
+    background-color: rgba(67, 179, 117, 1);
+  }
+

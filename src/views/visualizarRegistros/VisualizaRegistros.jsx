@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Select from "react-select";
+
 import '../../styles/visualizaRegistros.css';
 import { Box , Checkbox} from '@mui/material';
 import DatePicker from 'react-datepicker';
@@ -8,17 +11,21 @@ import { Button , Container, Row, Col
 } from 'react-bootstrap';
 import limpiar from '../../assets/img/limpiar.jpg';
 import ModalVisualizarRegistros from './ModalVisualizarRegistros';
+import svgManager from '../../assets/img/svg';
+
+const nofilterSVG = svgManager.getSVG('nofilter');
 
 const columns = [
-  { field: 'id', headerName: 'N° Identificación', flex: 1,  headerClassName: 'super-app-theme--header' },
-  { field: 'nombres', headerName: 'Nombres', flex: 1, headerClassName: 'super-app-theme--header' },
-  { field: 'apellidos', headerName: 'Apellidos', flex: 1 , headerClassName: 'super-app-theme--header'},
+  { field: 'id', headerName: 'N° Identificación', flex: 1,  headerClassName: 'super-app-theme--header', sortable: false },
+  { field: 'nombres', headerName: 'Nombres', flex: 1, headerClassName: 'super-app-theme--header', sortable: false },
+  { field: 'apellidos', headerName: 'Apellidos', flex: 1 , headerClassName: 'super-app-theme--header', sortable: false},
   {
     field: 'telefono',
     headerName: 'Teléfono',
     type: 'number',
     flex: 1,
     headerClassName: 'super-app-theme--header',
+    sortable: false
   },
   {
     field: 'correo',
@@ -27,6 +34,7 @@ const columns = [
     sortable: false,
     flex: 1,
     headerClassName: 'super-app-theme--header',
+    sortable: false
   },
     {
     //estado
@@ -36,7 +44,8 @@ const columns = [
     sortable: false,
     flex: 1,
     headerClassName: 'super-app-theme--header',
-    }
+    
+    sortable: false}
 ];
 
 const rows = [
@@ -70,11 +79,14 @@ export default function VisualizaRegistros() {
         }
         return '';
       };
+
+      const CustomCheckbox = ({ checked }) => (
+        <span style={{ cursor: 'pointer' }}>
+          {checked ? <CheckCircleOutlineIcon color="disabled" /> : <CheckCircleOutlineIcon color="disabled" />}
+        </span>
+      );
+      
     
-
-
-
-
     return (
         <>
             <div className="container" style={{backgroundColor : 'white', padding: '3rem', borderRadius: '10px'}}>
@@ -102,23 +114,25 @@ export default function VisualizaRegistros() {
                         <p className='estado'
                         >Estado</p>
                         <select className='selectEstado' >
-                            <option value="">Seleccionar</option>
-                            <option value="1">No Contesta</option>
-                            <option value="2">Lista Gris</option>
-                            <option value="3">Contactado</option>
-                            <option value="4">Venta Concretada</option>
-                            <option value="5">Por Contactar</option>
+                            <option value="" className='optionVisualizar'>Seleccionar</option>
+                            <option value="1" className='optionVisualizar'>No Contesta</option>
+                            <option value="2" className='optionVisualizar'>Lista Gris</option>
+                            <option value="3" className='optionVisualizar'>Contactado</option>
+                            <option value="4" className='optionVisualizar'>Venta Concretada</option>
+                            <option value="5" className='optionVisualizar'>Por Contactar</option>
                         </select>
                     </Col>
-                    <Col md={4}> 
-                        <Button variant="success">Buscar</Button>{' '}
-                        
-                        <Button variant="success" onClick={openModalVisualizarRegistros}
-                         >Limpiar
-                        </Button>{' '}
+                    <Col md={4} className='colBuscar' style={{ position: 'relative' }}>
+                        <button className='btnBuscar'>Buscar</button>
+                        <button className='btnLimpiar' onClick={openModalVisualizarRegistros}>
+                            <span dangerouslySetInnerHTML={{ __html: nofilterSVG }} />
+                        </button>
                     </Col>
 
+
                 </Row>
+                <br />
+                <br />
                 
                 <div style={{ height: 400, width: '100%', backgroundColor: 'white' }}>
                 <Box
@@ -134,6 +148,9 @@ export default function VisualizaRegistros() {
                         <DataGrid
                             rows={rows}
                             columns={columns}
+                            components={{
+                                Checkbox: CustomCheckbox, // Aquí se utiliza el componente personalizado
+                              }}
                             initialState={{
                                 pagination: {
                                     paginationModel: { page: 0, pageSize: 5 },
@@ -145,6 +162,8 @@ export default function VisualizaRegistros() {
                             autoHeight
                             headerClassName="super-app-theme--header"
                             getRowClassName={getRowClassName}
+                            disableColumnMenu
+                            
                         />
                 </Box>
                 

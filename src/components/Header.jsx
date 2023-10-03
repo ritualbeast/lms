@@ -1,7 +1,9 @@
 import React from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import '../styles/header.css';
-
+import svgManager from '../assets/img/svg';
+import UserIcon from '../assets/img/userIconn.png';
+const bellSVG = svgManager.getSVG('bell');
 const Header = () => {
   return (
     <div>
@@ -11,7 +13,13 @@ const Header = () => {
                 >Leads Management System</p>
             </Col>
             <Col md={2}>
-                <p>Logout</p>
+              
+              <div className="headerIcons">
+                
+                <span dangerouslySetInnerHTML={{ __html: bellSVG }} />
+                <img src={UserIcon} alt="User Icon" className="userIcon sameHeight" width={30} height={30} />
+
+              </div>
             </Col>
         </Row>
         
