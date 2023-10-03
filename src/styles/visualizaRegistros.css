@@ -75,3 +75,23 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
     text-align: left;
     color: rgba(75, 70, 92, 1);
 }
+
+.super-app-theme--activo {
+    color: #4B465C;
+    font-family: Open Sans;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+
+  }
+  
+  /* Estilo para filas inactivas */
+  .super-app-theme--inactivo {
+    color: red; /* Cambia el color de texto para filas inactivas a rojo */
+  }
+
+  .custom-header-text {
+    color: blue; /* Cambia el color del texto del encabezado de las columnas a azul */
+  }

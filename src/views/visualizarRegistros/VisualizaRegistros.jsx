@@ -41,6 +41,12 @@ const columns = [
 
 const rows = [
     { id: 1, nombres: 'Snow', apellidos: 'Jon', telefono: 35, correo: ', Jon', estado: 'activo' },
+    { id: 2, nombres: 'Lannister', apellidos: 'Cersei', telefono: 42, correo: ', Cersei', estado: 'activo' },
+    { id: 3, nombres: 'Lannister', apellidos: 'Jaime', telefono: 45, correo: ', Jaime', estado: 'activo' },
+    { id: 4, nombres: 'Stark', apellidos: 'Arya', telefono: 16, correo: ', Arya', estado: 'activo' },
+    { id: 5, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'activo' },
+    { id: 6, nombres: 'Melisandre', apellidos: null, telefono: 150, correo: ', Melisandre', estado: 'activo' },
+    
 
 ];
 
@@ -54,6 +60,18 @@ export default function VisualizaRegistros() {
     const openModalVisualizarRegistros = () => {
         setShowModalVisualizarRegistros(true);
     }
+
+    const getRowClassName = (params) => {
+        if (params.row.estado === 'activo') {
+          return 'super-app-theme--activo'; // Aplica la clase para filas activas
+        }
+        if (params.row.estado === 'inactivo') {
+          return 'super-app-theme--inactivo'; // Aplica la clase para filas inactivas
+        }
+        return '';
+      };
+    
+
 
 
 
@@ -117,23 +135,16 @@ export default function VisualizaRegistros() {
                             rows={rows}
                             columns={columns}
                             initialState={{
-                            pagination: {
-                                paginationModel: { page: 0, pageSize: 5 },
-                            },
+                                pagination: {
+                                    paginationModel: { page: 0, pageSize: 5 },
+                                },
                             }}
                             pageSizeOptions={[5, 10]}
-                            components={{
-                                Checkbox: (props) => (
-                                <Checkbox
-                                    {...props}
-                                    style={{ borderRadius: '20px' }} // Ajusta el radio aquí según tus preferencias
-                                />
-                                ),
-                            }}
+                            
                             checkboxSelection
                             autoHeight
-                            headerClassName="custom-header-class"
-                            
+                            headerClassName="super-app-theme--header"
+                            getRowClassName={getRowClassName}
                         />
                 </Box>
                 
