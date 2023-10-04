@@ -38,9 +38,19 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
     left: 272px;
     border-radius: 6px;
     border: 1.05px;
-    border: 1.05px solid rgba(219, 224, 228, 1)
+    border: 1.05px solid rgba(219, 224, 228, 1);
+    text-align: right;
+    background-color: #FFFFFF;
+    padding-right: 10%;
 
 }
+.divDatepicker{
+  text-align: start;
+  width: 100%;
+  margin-left: 3%;
+}
+
+
 
 .tituloRegistros{
     
@@ -156,3 +166,98 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
     background-color: rgba(67, 179, 117, 1);
   }
 
+ .btnSiguiente{
+  background-color: aqua;
+ }
+
+ .css-ytd7wl-MuiPaginationItem-icon {
+  border-style: none;
+  background-color: rgb(255, 255, 255);
+  font-family: Open Sans;
+  font-size: 16px !important;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgb(0, 0, 0) !important;
+  opacity: 1 !important;
+ }
+
+ .customPaginationItem2{
+  background-color: rgb(255, 255, 255);
+  font-family: Open Sans;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(75, 70, 92, 1);
+  border-style: none;
+  opacity: 50%;
+ }
+
+ .customPaginationItem2.Mui-selected{
+  background-color: rgb(205, 46, 46);
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgb(0, 0, 0);
+  border-style: none;
+  opacity: 100%;
+ }
+
+ .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+  background-color: rgb(255, 255, 255) !important;
+ }
+ .spanVisualizar{
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(75, 70, 92, 1);
+  margin-left: 10px;
+
+ }
+ .spanVisualizar2{
+  font-family: Open Sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(75, 70, 92, 1);
+  margin-left: 5px;
+  margin-right: 10px;
+ }
+
+
+ .selectVisualizarRegistros{
+  margin: 2%;
+  text-align: center;
+  width:  65px;
+  height:  42px;
+  top: 838px;
+  left: 480px;
+  padding: 13px, 44px, 13px, 17px;
+  border-radius: 6px;
+  border: 1px;
+  gap: 5px;
+  border: 1px solid rgba(75, 70, 92, 1);
+  color: linear-gradient(0deg, #4B465C, #4B465C),
+  linear-gradient(0deg, #FFFFFF, #FFFFFF);
+
+
+ }
+ .divVisualizarRegistros{
+  width: 100%;
+ }
+
+ .css-1oj2twp-MuiPagination-root {
+  width: 65% !important;
+  text-align: end !important;
+}
