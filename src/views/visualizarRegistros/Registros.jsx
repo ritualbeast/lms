@@ -27,7 +27,7 @@ const Registros = () => {
 
   return (
     <Container fluid>
-      <Row className='rowRegistros vh-100'>
+      <Row className='rowRegistros '>
         {/* Sidebar ocupa el 20% */}
         <Col className='sideBarPrincipal p-0' xs={2}>            
           <Sidebar />

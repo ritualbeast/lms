@@ -67,16 +67,16 @@ const rows = [
     { id: 8, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
     { id: 0, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
     { id: 9, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
-    { id: 1, nombres: 'Snow', apellidos: 'Jon', telefono: 9061051732, correo: ', Jon', estado: 'Contactado' },
-    { id: 2, nombres: 'Lannister', apellidos: 'Cersei', telefono: 9061051732, correo: ', Cersei', estado: 'Por Contactar' },
-    { id: 3, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
-    { id: 4, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
-    { id: 5, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
-    { id: 6, nombres: 'Snow', apellidos: 'Jon', telefono: 9061051732, correo: ', Jon', estado: 'Contactado' },
-    { id: 7, nombres: 'Lannister', apellidos: 'Cersei', telefono: 9061051732, correo: ', Cersei', estado: 'Por Contactar' },
-    { id: 8, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
-    { id: 0, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd bermeo', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
-    { id: 9, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
+    { id: 10, nombres: 'Snow', apellidos: 'Jon', telefono: 9061051732, correo: ', Jon', estado: 'Contactado' },
+    { id: 20, nombres: 'Lannister', apellidos: 'Cersei', telefono: 9061051732, correo: ', Cersei', estado: 'Por Contactar' },
+    { id: 30, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
+    { id: 40, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
+    { id: 50, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
+    { id: 60, nombres: 'Snow', apellidos: 'Jon', telefono: 9061051732, correo: ', Jon', estado: 'Contactado' },
+    { id: 70, nombres: 'Lannister', apellidos: 'Cersei', telefono: 9061051732, correo: ', Cersei', estado: 'Por Contactar' },
+    { id: 80, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
+    { id: 11, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd bermeo', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
+    { id: 90, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
     
 ];
 
@@ -88,6 +88,18 @@ export default function VisualizaRegistros() {
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
     const [showModalVisualizarRegistros, setShowModalVisualizarRegistros] = useState(false);
+    const [optionVisualizar, setOptionVisualizar] = useState('5');
+    const [dataGridKey, setDataGridKey] = useState(0);
+
+    useEffect(() => {
+        if (startDate && endDate) {
+            console.log('startDate', startDate);
+            console.log('endDate', endDate);
+        }
+         
+
+    }, [optionVisualizar, startDate, endDate]);
+
 
     const openModalVisualizarRegistros = () => {
         setShowModalVisualizarRegistros(true);
@@ -114,7 +126,12 @@ export default function VisualizaRegistros() {
           
         </span>
         };
-
+    
+        const handleChange = (e) => {
+            console.log(e.target.value);
+            setOptionVisualizar(e.target.value);
+            setDataGridKey(dataGridKey + 1);
+          };
       const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
         
         <div>
@@ -132,25 +149,28 @@ export default function VisualizaRegistros() {
       ));
 
         const customPagination = () => {
-        const totalPages = Math.ceil(rows.length / 2);
+        const totalPages = Math.ceil(rows.length / optionVisualizar);
+
+
+        const ver = () => {
+            console.log(optionVisualizar);
+        }
 
         return (
             <>
+                <button onClick={ver}
+                >ccc</button>
                 <div className='divVisualizarRegistrosCont'>
-                    <div className='divVisualizarRegistros'>
-                        <span className='spanVisualizar'
-                        >Mostrar</span>
-                        <select className='selectVisualizarRegistros'>
-                            <option value="1" className='optionVisualizar'>5</option>
-                            <option value="2" className='optionVisualizar'>10</option>
-                            <option value="3" className='optionVisualizar'>20</option>
-                            <option value="4" className='optionVisualizar'>50</option>
-                        </select>
-                        <span className='spanVisualizar2'>
-                            Mostrando 1 a 10 de 100 entradas
-                        </span>
-                        
-                    </div>
+                <div className='divVisualizarRegistros'>
+                    <span className='spanVisualizar'>Mostrar</span>
+                    <select className='selectVisualizarRegistros' onChange={handleChange} value={optionVisualizar}>
+                        <option value={5} className='optionVisualizar'>5</option>
+                        <option value={10} className='optionVisualizar'>10</option>
+                    </select>
+                    <span className='spanVisualizar2'>
+                        Mostrando {optionVisualizar} a {Math.min(optionVisualizar, rows.length)} de {rows.length} entradas
+                    </span>
+                </div>
                     <div className='divVisualizarRegistros2'>
                         <Pagination
                             count={totalPages}
@@ -271,6 +291,7 @@ export default function VisualizaRegistros() {
                         }}
                         >
                             <DataGrid
+                                key={dataGridKey}
                                 rows={redactedRows}
                                 columns={columns}
                                 components={{
@@ -279,7 +300,7 @@ export default function VisualizaRegistros() {
                                 }}
                                 initialState={{
                                     pagination: {
-                                        paginationModel: { page: 0, pageSize: 5 },
+                                        paginationModel: { page: 0, pageSize: optionVisualizar },
                                     },
                                 }}
                                 pageSizeOptions={[5, 10]}
