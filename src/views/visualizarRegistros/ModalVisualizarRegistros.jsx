@@ -77,7 +77,7 @@ const ModalVisualizarRegistros = ({open, onClose}) => {
             backdrop="static"
             backdropClassName="custom-opacity" // Añade esta línea
           >
-            <span dangerouslySetInnerHTML={{ __html: xSVG }} onClick={onClose} className='closeModal' />
+            <span dangerouslySetInnerHTML={{ __html: xSVG }} onClick={handleSaveClick} className='closeModal' />
             <div className="modalVisualizarRegistros" onClick={handleOutsideClick}>
               <div className="tituloModal">   
                 <p>Información del Cliente</p>

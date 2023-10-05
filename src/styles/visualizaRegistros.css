@@ -148,7 +148,7 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
   
   .btnLimpiar {
     background-color: rgba(255, 255, 255, 1);
-    width: 20%; /* Puedes ajustar este valor según tu diseño */
+    width: 13%; /* Puedes ajustar este valor según tu diseño */
     height: 40px;
     border-radius: 6px;
     border: 1.2px solid rgba(67, 179, 117, 1);
@@ -158,7 +158,7 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
     color : rgb(255, 255, 255);
     font-family: Open Sans;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 700 !important; 
 
   }
 
@@ -254,10 +254,51 @@ linear-gradient(0deg, #FFFFFF, #FFFFFF);
 
  }
  .divVisualizarRegistros{
-  width: 100%;
+  width: 50%;
+  text-align: left;
  }
 
  .css-1oj2twp-MuiPagination-root {
-  width: 65% !important;
   text-align: end !important;
+}
+.css-wop1k0-MuiDataGrid-footerContainer{
+  text-align: end !important;
+   
+  -webkit-justify-content: none !important;
+  justify-content: none !important;
+}
+
+
+.divVisualizarRegistrosCont{
+  display: flex;
+  width: 100%;
+  margin-right: 2%;
+}
+
+.divVisualizarRegistros2{
+  display: flex;
+  width: 50%;
+  margin-top: 1%;
+  justify-content: flex-end;
+}
+
+.dataGrid{
+  font-family: Open Sans !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: aqua;
+}
+
+.css-de9k3v-MuiDataGrid-selectedRowCount{
+  visibility: hidden !important;
+  width: 0px !important;
+  margin: 0px !important;
+}
+
+.css-5wly58-MuiDataGrid-root.MuiDataGrid-autoHeight {
+  height: auto;
+  border-style: none;
 }
