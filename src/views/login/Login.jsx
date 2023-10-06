@@ -40,24 +40,17 @@ export default function Login() {
   const [usuario, setUsuario] = React.useState('');
   const [contrasenia, setContrasenia] = React.useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+   
 
   const handleLogin = async () => {
     console.log('entro a la funcion');
     try {
       const token = await LoginToken({ usuario, contrasenia });
-      console.log(token.data.nombreUsuario);
+      console.log(token);
       if (token.code === 200) {
         localStorage.setItem('tokenLMS', token.data.nombreUsuario);
         console.log('entro al if');
-        window.location.href = '/registros';
+        // window.location.href = '/registros';
       }
       else if (token.code === 400) {
         toast.error(token.message , {

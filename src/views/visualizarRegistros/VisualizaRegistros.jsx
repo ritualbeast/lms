@@ -77,6 +77,27 @@ const rows = [
     { id: 80, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
     { id: 11, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd bermeo', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
     { id: 90, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
+    { id: 1, nombres: 'Snow', apellidos: 'Jon', telefono: 9061051732, correo: ', Jon', estado: 'Contactado' },
+    { id: 2, nombres: 'Lannister', apellidos: 'Cersei', telefono: 9061051732, correo: ', Cersei', estado: 'Por Contactar' },
+    { id: 3, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
+    { id: 4, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
+    { id: 5, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
+    { id: 6, nombres: 'Snow', apellidos: 'Jon', telefono: 9061051732, correo: ', Jon', estado: 'Contactado' },
+    { id: 7, nombres: 'Lannister', apellidos: 'Cersei', telefono: 9061051732, correo: ', Cersei', estado: 'Por Contactar' },
+    { id: 8, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
+    { id: 0, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
+    { id: 9, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
+    { id: 10, nombres: 'Snow', apellidos: 'Jon', telefono: 9061051732, correo: ', Jon', estado: 'Contactado' },
+    { id: 20, nombres: 'Lannister', apellidos: 'Cersei', telefono: 9061051732, correo: ', Cersei', estado: 'Por Contactar' },
+    { id: 30, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
+    { id: 40, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
+    { id: 50, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
+    { id: 60, nombres: 'Snow', apellidos: 'Jon', telefono: 9061051732, correo: ', Jon', estado: 'Contactado' },
+    { id: 70, nombres: 'Lannister', apellidos: 'Cersei', telefono: 9061051732, correo: ', Cersei', estado: 'Por Contactar' },
+    { id: 80, nombres: 'Lannister', apellidos: 'Jaime', telefono: 9061051732, correo: ', Jaime', estado: 'Lista Gris' },
+    { id: 11, nombres: 'Stark', apellidos: 'Aryasdfsdfsdsfdfsdssdsdsssssssssssssssssdsdsd bermeo', telefono: 9061051732, correo: ', Arya', estado: 'No Contesta' },
+    { id: 90, nombres: 'Targaryen', apellidos: 'Daenerys', telefono: null, correo: ', Daenerys', estado: 'Venta Concretada' },
+    
     
 ];
 
@@ -90,6 +111,7 @@ export default function VisualizaRegistros() {
     const [showModalVisualizarRegistros, setShowModalVisualizarRegistros] = useState(false);
     const [optionVisualizar, setOptionVisualizar] = useState('5');
     const [dataGridKey, setDataGridKey] = useState(0);
+    const [paginaActual, setPaginaActual] = useState(1);
 
     useEffect(() => {
         if (startDate && endDate) {
@@ -101,7 +123,8 @@ export default function VisualizaRegistros() {
     }, [optionVisualizar, startDate, endDate]);
 
 
-    const openModalVisualizarRegistros = () => {
+    const openModalVisualizarRegistros = (id) => {
+        console.log(id);
         setShowModalVisualizarRegistros(true);
     }
 
@@ -156,16 +179,21 @@ export default function VisualizaRegistros() {
             console.log(optionVisualizar);
         }
 
+        const cambiarPagina = (event, page) => {
+            console.log('Cambio de página', page);
+            // Realiza cualquier acción que necesites con el número de página (page).
+        }
+
+
         return (
             <>
-                <button onClick={ver}
-                >ccc</button>
                 <div className='divVisualizarRegistrosCont'>
                 <div className='divVisualizarRegistros'>
                     <span className='spanVisualizar'>Mostrar</span>
                     <select className='selectVisualizarRegistros' onChange={handleChange} value={optionVisualizar}>
                         <option value={5} className='optionVisualizar'>5</option>
                         <option value={10} className='optionVisualizar'>10</option>
+                        <option value={20} className='optionVisualizar'>20</option>
                     </select>
                     <span className='spanVisualizar2'>
                         Mostrando {optionVisualizar} a {Math.min(optionVisualizar, rows.length)} de {rows.length} entradas
@@ -175,6 +203,7 @@ export default function VisualizaRegistros() {
                         <Pagination
                             count={totalPages}
                             hidePrevButton
+                            onChange={cambiarPagina}
                             renderItem={(item) => (
                                 <PaginationItem
                                 components={{
@@ -231,11 +260,10 @@ export default function VisualizaRegistros() {
     return (
         <>
             <div className="container" style={{
-                backgroundColor : 'white', padding: '3rem', borderRadius: '10px', border: '0.75px solid rgba(0, 0, 0, 0.1)'
+                backgroundColor : 'white',  padding: '3rem', borderRadius: '10px', border: '0.75px solid rgba(0, 0, 0, 0.1)'
                 }}>
                 <p className="tituloRegistros"
                 >Registros</p>
-                <br />
                 <Row className='filtrosRegistros'>
                     <Col md={4}>
                         <p className='periodo'
@@ -269,7 +297,7 @@ export default function VisualizaRegistros() {
                     </Col>
                     <Col md={4} className='colBuscar' style={{ position: 'relative' }}>
                         <button className='btnBuscar'>Buscar</button>
-                        <button className='btnLimpiar' onClick={openModalVisualizarRegistros}>
+                        <button className='btnLimpiar'>
                             <span dangerouslySetInnerHTML={{ __html: nofilterSVG }} />
                         </button>
                     </Col>
@@ -279,17 +307,17 @@ export default function VisualizaRegistros() {
                 <br />
                 <br />
                 
-                <div style={{ height: 400, width: '100%', backgroundColor: 'white' }}>
+                <div style={{ height: '100%', width: '100%', backgroundColor: 'white' }}>
                     <Box
                         sx={{
-                            height: 300,
-                            width: '100%',
-                            '& .super-app-theme--header': {
+                        height: '100%', // Esto establece una altura máxima del 100% del contenedor principal
+                        width: '100%',
+                        overflowY: 'auto', // Esto permite que el contenido sea desplazable si se sale del contenedor
+                        '& .super-app-theme--header': {
                             backgroundColor: 'rgba(67, 179, 117, 1)',
-
-                            },
+                        },
                         }}
-                        >
+                    >
                             <DataGrid
                                 key={dataGridKey}
                                 rows={redactedRows}
@@ -310,7 +338,12 @@ export default function VisualizaRegistros() {
                                 headerClassName="esuper-app-theme--headr"
                                 getRowClassName={getRowClassName}
                                 disableColumnMenu
-                                
+                                onCellDoubleClick={(params, event) => {
+                                    console.log(params);
+                                    console.log(event);
+                                    openModalVisualizarRegistros(params.row.id);
+                                }
+                                }
                                 className='dataGrid'
                             />
                     </Box>

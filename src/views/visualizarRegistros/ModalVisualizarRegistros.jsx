@@ -83,12 +83,9 @@ const ModalVisualizarRegistros = ({open, onClose}) => {
                 <p>Información del Cliente</p>
               </div>
               <div className="containerModal">
-                <Row className="justify-content-center">
-                <Col sm={6} className="colModals">
-                  <RowModalContent data={data} handleSelectChange={handleSelectChange} selectedValue={selectedValue} />
-                </Col>
+                    <RowModalContent data={data} handleSelectChange={handleSelectChange} selectedValue={selectedValue} />
+                 
 
-                </Row>
               </div>
               <br />
                 <div className="botonModal">
@@ -110,9 +107,9 @@ const ModalVisualizarRegistros = ({open, onClose}) => {
     const RowModalContent = ({ data, handleSelectChange, selectedValue }) => {
       return (
         <table style={{ margin: '0 auto', textAlign: 'center' }}>
-          <tbody>
+          <tbody className="tableBody">
             {data.map((item, index) => (
-              <tr key={index}>
+              <tr key={index} className="rows">
                 <td className="label">{item.label}</td>
                 <td className="content">{item.content}</td>
               </tr>

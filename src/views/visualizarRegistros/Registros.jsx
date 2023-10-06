@@ -22,29 +22,29 @@ const Registros = () => {
 
   if (!isValidated) {
     // Muestra un mensaje de carga o error si la validación no pasa
-    return <div>Cargando...</div>; // Puedes personalizar este mensaje
+    return <div></div>; // Puedes personalizar este mensaje
   }
 
   return (
-    <Container fluid>
-      <Row className='rowRegistros '>
-        {/* Sidebar ocupa el 20% */}
-        <Col className='sideBarPrincipal p-0' xs={2}>            
-          <Sidebar />
-        </Col>
-        {/* Contenido ocupa el 80% */}
-        <Col xs={10} className='contenidoPrincipal'>
-          <Container>
-            <Row>
-              <Col>
-                <Header />
-                <VisualizaRegistros />
-              </Col>
-            </Row>
-          </Container>
-        </Col>
-      </Row>
-    </Container>
+    <div className='contenedorPrincipal' style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Row className='rowRegistros' style={{ flex: 1 }}>
+      {/* Sidebar ocupa el 20% */}
+      <Col className='sideBarPrincipal p-0' xs={2}>
+        <Sidebar />
+      </Col>
+      {/* Contenido ocupa el 80% */}
+      <Col xs={10} className='contenidoPrincipal'>
+        <Container>
+          <Row>
+            <Col>
+              <Header />
+              <VisualizaRegistros />
+            </Col>
+          </Row>
+        </Container>
+      </Col>
+    </Row>
+  </div>
   );
 };
 
