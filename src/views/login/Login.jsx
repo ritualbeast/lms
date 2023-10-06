@@ -49,8 +49,7 @@ export default function Login() {
       console.log(token);
       if (token.code === 200) {
         localStorage.setItem('tokenLMS', token.data.nombreUsuario);
-        console.log('entro al if');
-        // window.location.href = '/registros';
+        window.location.href = '/registros';
       }
       else if (token.code === 400) {
         toast.error(token.message , {

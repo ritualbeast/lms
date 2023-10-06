@@ -4,6 +4,8 @@ import '../../styles/ModalVisualizarRegistros.css';
 import svgManager from '../../assets/img/svg';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Select from "react-select";
+import Menu from '@mui/material/Menu';
 
 const xSVG = svgManager.getSVG('x');
 
@@ -14,8 +16,9 @@ const ModalVisualizarRegistros = ({open, onClose}) => {
     e.stopPropagation(); 
   };
 
-  const handleSelectChange = (e) => {
-    setSelectedValue(e.target.value);
+  const handleSelectChange = (selectedOption) => {
+    // Use selectedOption.value para obtener el valor seleccionado
+    setSelectedValue(selectedOption.value);
   };
 
   const handleSaveClick = () => {
@@ -105,8 +108,46 @@ const ModalVisualizarRegistros = ({open, onClose}) => {
 
     
     const RowModalContent = ({ data, handleSelectChange, selectedValue }) => {
+      const options = [
+
+        { value: "1", label: "No Contesta" },
+        { value: "2", label: "Lista Gris" },
+        { value: "3", label: "Contactado" },
+        { value: "4", label: "Venta Concretada" },
+        { value: "5", label: "Por Contactar" },
+      ];
+
+      const customStyles = {
+        control: (provided) => ({
+          ...provided,
+          backgroundColor: '#ffffff', // Color de fondo normal
+          textAlign: 'left',
+          fontSize: '12px',
+          fontWeight: '400',
+          fontFamily: 'Open Sans',
+          color: '#8b97a3',
+        }),
+        option: (provided, state) => ({
+          ...provided,
+          backgroundColor: state.isSelected ? '#f0f0f0' : '#fff', // Color de fondo cuando la opción está seleccionada
+          ':hover': {
+            backgroundColor: '#43b3751a', // Color de fondo cuando pasas el cursor
+            borderRadius: '10px',
+          },
+          textAlign: 'left',
+          textAlign: 'left',
+          fontSize: '12px',
+          fontWeight: '400',
+          fontFamily: 'Public Sans',
+          color: '#8b97a3',
+        }),
+        
+      };
+
+
+      
       return (
-        <table style={{ margin: '0 auto', textAlign: 'center' }}>
+        <table style={{ margin: '0 auto', textAlign: 'center', width: '70%' }}>
           <tbody className="tableBody">
             {data.map((item, index) => (
               <tr key={index} className="rows">
@@ -117,14 +158,15 @@ const ModalVisualizarRegistros = ({open, onClose}) => {
             <tr>
               <td className="label">Estado <span className="required-asterisk">*</span></td>
               <td>
-                <select className="selectEstado" value={selectedValue} onChange={handleSelectChange}>
-                  <option value="">Seleccionar</option>
-                  <option value="1">No Contesta</option>
-                  <option value="2">Lista Gris</option>
-                  <option value="3">Contactado</option>
-                  <option value="4">Venta Concretada</option>
-                  <option value="5">Por Contactar</option>
-                </select>
+                <Select 
+                  options={options} 
+                  onChange={handleSelectChange} 
+                  value={options.find((obj) => obj.value === selectedValue)}
+                  styles={customStyles}
+                  placeholder="Seleccionar"
+                  />
+                  
+
               </td>
             </tr>
           </tbody>
