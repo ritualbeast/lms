@@ -25,6 +25,7 @@ const LoginToken = async ({ usuario, contrasenia }) => {
     // const response = await fetch('https://api-phantomx.veris.com.ec/seguridadtest/v1/autenticacion/login', requestOptions);
     const data = await response.json();
     console.log(data);
+    localStorage.setItem('secuenciaUsuario', data.data.secuenciaUsuario);
     
     
     ConsultarSucursales(data.data.idToken, data.data.secuenciaUsuario);

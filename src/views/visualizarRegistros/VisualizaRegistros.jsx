@@ -16,6 +16,7 @@ import PaginationItem from '@mui/material/PaginationItem';
 import Checkbox from '@mui/material/Checkbox';
 import DataRow from '../../components/DataRow';
 import { render } from '@testing-library/react';
+import { getEstadoDetalle, getListarPersonal, getBitacora } from '../../services/ConsultarServices';
 
 
 
@@ -112,12 +113,17 @@ export default function VisualizaRegistros() {
     const [optionVisualizar, setOptionVisualizar] = useState('5');
     const [dataGridKey, setDataGridKey] = useState(0);
     const [paginaActual, setPaginaActual] = useState(1);
+    const [listarEstado, setListarEstado] = useState([]);
+    const [selectedValue, setSelectedValue] = useState("");
 
     useEffect(() => {
         if (startDate && endDate) {
             console.log('startDate', startDate);
             console.log('endDate', endDate);
         }
+         listarEstados();
+        // listarPersonal();
+        listarBitacora();
          
 
     }, [optionVisualizar, startDate, endDate]);
@@ -138,124 +144,196 @@ export default function VisualizaRegistros() {
         return '';
       };
 
-      const CustomCheckbox = ({ checked, isFirstCheckbox }) => {
-        const checkboxStyle = {
-            cursor: 'pointer',
-            color: isFirstCheckbox ? 'white' : 'green', // Cambia el color según sea el primer checkbox o no
-            };
-        <span style={{ cursor: 'pointer' }}>
-            {checked ? <Checkbox  style={{backgroundColor: 'green', color: 'white'}} inputProps={{ 'aria-label': 'controlled' }} icon={<CheckCircleOutlineIcon style={{color: 'white'}}/>} checkedIcon={<CheckCircleOutlineIcon style={{color: 'white'}}/>} /> : <Checkbox />}
-           
-          
-        </span>
+    const CustomCheckbox = ({ checked, isFirstCheckbox }) => {
+    const checkboxStyle = {
+        cursor: 'pointer',
+        color: isFirstCheckbox ? 'white' : 'green', // Cambia el color según sea el primer checkbox o no
         };
-    
-        const handleChange = (e) => {
-            console.log(e.target.value);
-            setOptionVisualizar(e.target.value);
-            setDataGridKey(dataGridKey + 1);
-          };
-      const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
+    <span style={{ cursor: 'pointer' }}>
+        {checked ? <Checkbox  style={{backgroundColor: 'green', color: 'white'}} inputProps={{ 'aria-label': 'controlled' }} icon={<CheckCircleOutlineIcon style={{color: 'white'}}/>} checkedIcon={<CheckCircleOutlineIcon style={{color: 'white'}}/>} /> : <Checkbox />}
         
-        <div>
-            <button className='datePicker' onClick={onClick} ref={ref}>
-                <div className='divDatepicker'>
-                    
-                    {value || "Seleccionar"} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                </div>
-                <div style={{ position: 'absolute', height: '50%', width: '20%', top: '5px', right: '10px' }}>
-                    <span dangerouslySetInnerHTML={{ __html: calendarSVG }} />
-                </div>
-            </button>
-          
-        </div>
-      ));
-
-        const customPagination = () => {
-        const totalPages = Math.ceil(rows.length / optionVisualizar);
-
-
-        const ver = () => {
-            console.log(optionVisualizar);
-        }
-
-        const cambiarPagina = (event, page) => {
-            console.log('Cambio de página', page);
-            // Realiza cualquier acción que necesites con el número de página (page).
-        }
-
-
-        return (
-            <>
-                <div className='divVisualizarRegistrosCont'>
-                <div className='divVisualizarRegistros'>
-                    <span className='spanVisualizar'>Mostrar</span>
-                    <select className='selectVisualizarRegistros' onChange={handleChange} value={optionVisualizar}>
-                        <option value={5} className='optionVisualizar'>5</option>
-                        <option value={10} className='optionVisualizar'>10</option>
-                        <option value={20} className='optionVisualizar'>20</option>
-                    </select>
-                    <span className='spanVisualizar2'>
-                        Mostrando {optionVisualizar} a {Math.min(optionVisualizar, rows.length)} de {rows.length} entradas
-                    </span>
-                </div>
-                    <div className='divVisualizarRegistros2'>
-                        <Pagination
-                            count={totalPages}
-                            hidePrevButton
-                            onChange={cambiarPagina}
-                            renderItem={(item) => (
-                                <PaginationItem
-                                components={{
-                                    last: (props) => <button {...props}>Last</button>,
-                                    next: (props) => <button {...props}>Siguiente &gt;</button>,
-                                    first: (props) => <button {...props}>First</button>,
-                                    previous: (props) => <button {...props}>Previous</button>
-                                }}
-                                className='customPaginationItem2'
-                                style={{ 
-                                    fontSize: '16px', 
-                                    color: 'black',
-                                    fontFamily: 'Open Sans',
-                                    fontWeight: '600',
-                                }}
-                                {...item }
-                                />
-                            )}
-                        
-                        />
-
-                    </div>
-                </div>
+        
+    </span>
+    };
+    
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        setOptionVisualizar(e.target.value);
+        setDataGridKey(dataGridKey + 1);
+        };
+    const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
+    
+    <div>
+        <button className='datePicker' onClick={onClick} ref={ref}>
+            <div className='divDatepicker'>
                 
-                    
-            </>
-            
+                {value || "Seleccionar"} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </div>
+            <div style={{ position: 'absolute', height: '50%', width: '20%', top: '5px', right: '10px' }}>
+                <span dangerouslySetInnerHTML={{ __html: calendarSVG }} />
+            </div>
+        </button>
         
-        ); 
-        };
+    </div>
+    ));
 
-        const redactData = (data) => {
+    const customPagination = () => {
+    const totalPages = Math.ceil(rows.length / optionVisualizar);
+
+
+    const ver = () => {
+        console.log(optionVisualizar);
+    }
+
+    const cambiarPagina = (event, page) => {
+        console.log('Cambio de página', page);
+        // Realiza cualquier acción que necesites con el número de página (page).
+    }
+
+
+    return (
+        <>
+            <div className='divVisualizarRegistrosCont'>
+            <div className='divVisualizarRegistros'>
+                <span className='spanVisualizar'>Mostrar</span>
+                <select className='selectVisualizarRegistros' onChange={handleChange} value={optionVisualizar}>
+                    <option value={5} className='optionVisualizar'>5</option>
+                    <option value={10} className='optionVisualizar'>10</option>
+                    <option value={20} className='optionVisualizar'>20</option>
+                </select>
+                <span className='spanVisualizar2'>
+                    Mostrando {optionVisualizar} a {Math.min(optionVisualizar, rows.length)} de {rows.length} entradas
+                </span>
+            </div>
+                <div className='divVisualizarRegistros2'>
+                    <Pagination
+                        count={totalPages}
+                        hidePrevButton
+                        onChange={cambiarPagina}
+                        renderItem={(item) => (
+                            <PaginationItem
+                            components={{
+                                last: (props) => <button {...props}>Last</button>,
+                                next: (props) => <button {...props}>Siguiente &gt;</button>,
+                                first: (props) => <button {...props}>First</button>,
+                                previous: (props) => <button {...props}>Previous</button>
+                            }}
+                            className='customPaginationItem2'
+                            style={{ 
+                                fontSize: '16px', 
+                                color: 'black',
+                                fontFamily: 'Open Sans',
+                                fontWeight: '600',
+                            }}
+                            {...item }
+                            />
+                        )}
+                    
+                    />
+
+                </div>
+            </div>
             
-          
-            return data.map(item => {
-              const redactedCorreo = item.correo ? '*'.repeat(item.correo.length) : null;
-              const redactedTelefono = item.telefono ? '*'.repeat(item.telefono.toString().length) : null;
-              
-              return {
-                ...item,
-                correo: redactedCorreo,
-                telefono: redactedTelefono,
-              }
-            });
-          };
-          
-          const redactedRows = redactData(rows);
-          
+                
+        </>
+        
     
-   
+    ); 
+    };
 
-      
+    const redactData = (data) => {
+        
+        
+        return data.map(item => {
+            const redactedCorreo = item.correo ? '*'.repeat(item.correo.length) : null;
+            const redactedTelefono = item.telefono ? '*'.repeat(item.telefono.toString().length) : null;
+            
+            return {
+            ...item,
+            correo: redactedCorreo,
+            telefono: redactedTelefono,
+            }
+        });
+        };
+          
+    const redactedRows = redactData(rows);
+          
+    const listarEstados = async () => {
+        try {
+            const response = await getEstadoDetalle();
+            console.log(response);
+            setListarEstado(response.data.listEstadosLeadsDetalle);
+            return response;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    const listarPersonal = async () => {
+        try {
+            const response = await getListarPersonal('66');
+            console.log(response);
+            // setListarEstado(response.data.listEstadosLeadsDetalle);
+            return response;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    const onChange = (valor) => {
+        console.log(valor);
+        setSelectedValue(valor.value);
+    }
+
+    const customStyles = {
+        control: (provided) => ({
+          ...provided,
+          backgroundColor: '#ffffff', // Color de fondo normal
+          textAlign: 'left',
+          fontSize: '12px',
+          fontWeight: '400',
+          fontFamily: 'Open Sans',
+          color: '#8b97a3',
+        }),
+        option: (provided, state) => ({
+          ...provided,
+          backgroundColor: state.isSelected ? '#f0f0f0' : '#fff', // Color de fondo cuando la opción está seleccionada
+          ':hover': {
+            backgroundColor: '#43b3751a', // Color de fondo cuando pasas el cursor
+            borderRadius: '10px',
+          },
+          textAlign: 'left',
+          textAlign: 'left',
+          fontSize: '12px',
+          fontWeight: '400',
+          fontFamily: 'Public Sans',
+          color: '#8b97a3',
+          backgroundColor: 'white',
+        }),
+        singleValue: (provided, state) => ({
+            ...provided,
+            color: '#8b97a3',
+            fontSize: '12px',
+        }),
+
+        
+      };
+
+
+      const listarBitacora = async () => {
+        try {
+            const response = await getBitacora();
+            console.log(response);
+            // setListarEstado(response.data.listEstadosLeadsDetalle);
+            return response;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     
     return (
         <>
@@ -286,14 +364,20 @@ export default function VisualizaRegistros() {
                     <Col md={4}>
                         <p className='estado'
                         >Estado</p>
-                        <select className='selectEstado' >
-                            <option value="" className='optionVisualizar'>Seleccionar</option>
-                            <option value="1" className='optionVisualizar'>No Contesta</option>
-                            <option value="2" className='optionVisualizar'>Lista Gris</option>
-                            <option value="3" className='optionVisualizar'>Contactado</option>
-                            <option value="4" className='optionVisualizar'>Venta Concretada</option>
-                            <option value="5" className='optionVisualizar'>Por Contactar</option>
-                        </select>
+                        {/* <select className='selectEstado'  onChange={onChange}>
+                            {listarEstado.map((item) => (
+                                <option value={item.idEstadoLMSDetalle} className='optionEstado'>{item.descripcion}</option>
+                            ))
+
+                            }
+                        </select> */}
+                        <Select 
+                            options={listarEstado.map((obj) => ({ value: obj.idEstadoLMSDetalle, label: obj.nombre }))}
+                            onChange={onChange}
+                            value={listarEstado.map((obj) => ({ value: obj.idEstadoLMSDetalle, label: obj.nombre })).find((obj) => obj.value === selectedValue)}
+                            styles={customStyles}
+                            placeholder="Seleccionar"
+                        />
                     </Col>
                     <Col md={4} className='colBuscar' style={{ position: 'relative' }}>
                         <button className='btnBuscar'>Buscar</button>
