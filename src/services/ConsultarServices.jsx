@@ -32,7 +32,6 @@ const getListarPersonal = async () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        // Puedes agregar otros encabezados si es necesario
       },
     };
     
@@ -60,16 +59,11 @@ const getBitacora = async () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        // Puedes agregar otros encabezados si es necesario
       },
     };
     
     const response = await fetch(url, requestOptions);
     
-    if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
-    }
-
     const data = await response.json();
     return data;
   } catch (error) {
